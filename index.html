@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous" />
+  <link rel="stylesheet" href="./css/style.css" />
+  <title>Lista de Tareas</title>
+</head>
+
+<body>
+  <div class="page-content page-container" id="page-content">
+    <div class="padding">
+      <div class="row container d-flex justify-content-center">
+        <div class="col-lg-8 grid-margin stretch-card">
+          <div class="card">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-8">
+                  <h3>Lista de Tareas</h3>
+                </div>
+                <div class="col-md-4 text-right">
+                  <button id="addTask" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                        Agregar
+                                    </button>
+                </div>
+              </div>
+              <div class="table-responsive">
+                <table id="htmltable" class="table">
+                  <thead>
+                    <tr>
+                      <th>Apellido y Nombre</th>
+                      <th>Tarea</th>
+                      <th>Estado</th>
+                      <th>Optiones</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tbody"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Button trigger modal -->
+  <!-- Modal -->
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">UwU</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <!-- BODY MODAL  -->
+        <div class="modal-body">
+          <h3>Agregar Tarea:</h3>
+          <hr />
+          <label for="fullName">Ingrese su nombre completo: </label>
+          <input type="text" name="fullName" id="fullName" required /><br />
+          <br>
+          <p id="fullNameError"></p>
+          <hr />
+          <label for="description">Ingrese una descripción:</label>
+          <input type="text" name="description" id="description" required /><br />
+          <br>
+          <p id="descriptionError"></p>
+          <hr />
+          <label for="state">Seleccione un estado: </label>
+          <select class="form" name="fk_state" id="fk_state"></select>
+          <br />
+          <br />
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                Cancelar
+                        </button>
+            <button type="submit" id="btnAddTask" disabled class="btn btn-primary" data-bs-dismiss="modal">
+                            Agregar
+                        </button>
+          </div>
+          <!-- FINAL BODY MODAL-->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Button trigger modal -->
+  <!-- Modal -->
+  <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deleteModalLabel">Confirmación</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Esta seguro de que desea eliminar esta Tarea?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" id="btnDeleteTask" class="btn btn-danger" data-bs-dismiss="modal">Eliminar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editModalLabel">Confirmación</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="fullNameEdit">Cambiar Nombre</label>
+            <input type="text" name="fullNameEdit" id="fullNameEdit"><br><br>
+            <p id="alertEditFullName"></p>
+            <hr>
+          </div>
+          <div class="form-group">
+            <label for="descriptionEdit">Cambiar tarea</label>
+            <input type="text" name="descriptionEdit" id="descriptionEdit"><br><br>
+            <p id="alerEditDescription"></p>
+            <hr>
+          </div>
+          <div class="form-group">
+            <label for="fk_stateEdit">Cambiar estado</label>
+            <select name="fk_stateEdit" id="fk_stateEdit"></select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" id="btnEditTask" class="btn btn-success" data-bs-dismiss="modal">Modificar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+  <script src="./src/activeBtnForm.js"></script>
+  <script src="./src/errors.js"></script>
+  <script src="./src/loadBody.js"></script>
+  <script src="./src/loadUpForm.js"></script>
+  <script src="./src/validationUpForm.js"></script>
+  <script src="./src/upFormFromAPI.js"></script>
+  <script src="./src/editTask.js"></script>
+  <script src="./src/validations.js"></script>
+  <script src="./src/editValidationTask.js"></script>
+</body>
+
+</html>
