@@ -12,7 +12,7 @@
   <title>Lista de Tareas</title>
 </head>
 
-<body>
+<body style="background-color: darkslategrey;">
   <div class="page-content page-container" id="page-content">
     <div class="padding">
       <div class="row container d-flex justify-content-center">
@@ -131,6 +131,7 @@
             <label for="fk_stateEdit">Cambiar estado</label>
             <select name="fk_stateEdit" id="fk_stateEdit"></select>
           </div>
+          <input type="text" id="hiddenUtilities" hidden>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
@@ -152,6 +153,7 @@
   <script src="./src/editTask.js"></script>
   <script src="./src/validations.js"></script>
   <script src="./src/editValidationTask.js"></script>
+  <script src="./src/deleteTask.js"></script>
 </body>
 
 </html>

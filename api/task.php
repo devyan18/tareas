@@ -22,8 +22,8 @@
       return $query;
     }
     function modificarTask($task){
-      $query = $this->connect()->prepare('UPDATE tasks SET fullName=:fullName,description=:description,fk_state=:fk_state WHERE 1');
-      $query->execute(['fullName' => $task['fullName'],'description' => $task['description'], 'fk_state' => $task['fk_state']]);
+      $query = $this->connect()->prepare('UPDATE tasks SET fullName=:fullName,description=:description,fk_state=:fk_state WHERE id_task = :id_task');
+      $query->execute(['id_task' => $task['id_task'], 'fullName' => $task['fullName'],'description' => $task['description'], 'fk_state' => $task['fk_state']]);
       return $query;
     }
     function obtenerStates(){

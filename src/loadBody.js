@@ -11,14 +11,14 @@ const loadBody = async() => {
   let array = ["", "Completado", "En Proceso", "Pendiente"];
   let classArray = ["", "success", "warning", "danger"];
   result.tasks.map((e) => {
-    let idEditBtn = "btnEditTask" + e.id_task;
-    let idDeleteBtn = "btnDeleteTask" + e.id_task;
+    let idEditBtn = "btnEditTaskss" + e.id_task;
+    let idDeleteBtn = "btnDeleteTaskss" + e.id_task;
     tbody.innerHTML += `<tr>
     <td>${e.fullName}</td>
             <td>${e.description}</td>
             <td><button class="btn btn-${classArray[e.fk_state]}">${array[e.fk_state]}</button></td>
             <td><button id="${idEditBtn}" data-bs-toggle="modal" data-bs-target="#editModal" onClick="loadParamersEditForm(${e.id_task}, ${e.fk_state})" type="button" class="btn btn-success">${objStyleOptions.edit}</button>
-            <button id="${idDeleteBtn}" data-bs-toggle="modal" data-bs-target="#deleteModal" type="button" class="btn btn-danger">${objStyleOptions.delete}</button></td>
+            <button id="${idDeleteBtn}" data-bs-toggle="modal" data-bs-target="#deleteModal" onClick="loadParamersEditForm(${e.id_task}, ${e.fk_state})"type="button" class="btn btn-danger">${objStyleOptions.delete}</button></td>
         </tr>`;
   });
 };

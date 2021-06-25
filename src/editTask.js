@@ -2,7 +2,7 @@ const loadParamersEditForm = (element, id_state) => {
   const elemento = document.getElementById("fk_stateEdit")
   loadEditForm(element)
   loadSelectEdit(elemento, id_state)
-  return id_state
+  return element
 }
 const loadSelectEdit = async(elemento, id) => {
   let content = `http://localhost/tareas/api/states.php`;
@@ -23,8 +23,11 @@ const loadEditForm = async(id) => {
   let result = await require.json()
   let editFullNameBox = document.getElementById('fullNameEdit');
   let editDescriptionBox = document.getElementById('descriptionEdit');
+  let hiddenUtilities = document.getElementById('hiddenUtilities');
 
   result.tasks.map(e => {
+    hiddenUtilities.value = e.id_task
+    console.log(hiddenUtilities.value)
     editFullNameBox.value = e.fullName
     editDescriptionBox.value = e.description
   })
